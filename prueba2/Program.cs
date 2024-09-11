@@ -55,3 +55,5 @@ Console.WriteLine( $"{updateText} {version}");
 string projectName = "First-Project";
 var path = $@"C:\Output\{projectName}\Data";
 Console.WriteLine(path);
+
+Console.WriteLine(@"\");
