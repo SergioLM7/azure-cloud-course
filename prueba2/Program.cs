@@ -46,14 +46,16 @@ string greeting = "Hello, ";
 string message = $"{greeting} {firstName}!";
 Console.WriteLine(message);
 
+Console.Clear();
 int version = 11;
 Console.WriteLine(version.ToString());
 string updateText = "Update to Windows";
 Console.WriteLine( $"{updateText} {version}");
 
-//Console.Clear();
-string projectName = "First-Project";
-var path = $@"C:\Output\{projectName}\Data";
-Console.WriteLine(path);
 
-Console.WriteLine(@"\");
+//Exercise Lesson2
+string projectName = "ACME";
+Console.WriteLine($"View English output:\n\tc:\\Exercise\\{projectName}\\data.txt");
+
+string russianMessage = "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u0432\u044b\u0432\u043e\u0434";
+Console.WriteLine($"{russianMessage}:\n\tc:\\Exercise\\ACME\\ru-RU\\data.txt");
