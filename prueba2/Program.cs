@@ -1,72 +1,60 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Text;
 
-//lesson 3
-int firstNumber = 12;
-int secondNumber = 7;
-var sumNumbers = firstNumber + secondNumber;
-Console.WriteLine(sumNumbers);
+//Exercise Lesson4
+/*Sophia: 93, 87, 98, 95, 100
 
-string firstName = "Bob";
-int widgetSold = 7;
-Console.WriteLine(firstName + " sold " + widgetSold + " widgets.");
-Console.WriteLine(firstName + " sold " + widgetSold + 7 + " widgets.");
-Console.WriteLine(firstName + " sold " + (widgetSold + 7) + " widgets.");
+Nicolas: 80, 83, 82, 88, 85
 
-//Exercise lesson 3
-var firstNumber2 = 45;
-var secondNumber2 = 2;
-double decimalNumber1 = 4.5;
-double decimalNumber2 = 2.35;
+Zahirah:   84, 96, 73, 85, 79
 
-//Sum two int
-var sum = firstNumber2 + secondNumber2;
-Console.WriteLine("This is the result of a sum: " + sum);
+Jeong:  90, 92, 98, 100, 97*/
 
-//Substr two int
-var substraction = firstNumber2 - secondNumber2;
-Console.WriteLine("This is the result of a subs: " +substraction);
+var gradesSophia = 93 + 87 + 98 + 95 + 100;
+var gradesNicolas = 80 +  83 +  82 +  88 + 85;
+var gradesZafirah = 84 +  96 +  73 +  85 + 79;
+var gradesJeong = 90 +  92 +  98 +  100 + 97;
+decimal currentAssigments = 5m;
 
-//Mult two int
-var multiplication = firstNumber2 * secondNumber2;
-Console.WriteLine("This is the result of a mult: " + multiplication);
+var averageSophia = gradesSophia / currentAssigments;
+var averageNicolas = gradesNicolas / currentAssigments;
+var averageZafirah = gradesZafirah / currentAssigments;
+var averageJeong = gradesJeong / currentAssigments;
 
-//Div and decimal Div
-var div = firstNumber2 / secondNumber2;
-decimal decimalDivResult = firstNumber2 / Convert.ToDecimal(secondNumber2);
-decimal decimalDivResultV2 = firstNumber2 / (decimal)secondNumber2;
-Console.WriteLine("This is the result of a div: " + div);
-Console.WriteLine("This is the result of a decimal div: " + decimalDivResult);
-Console.WriteLine("This is the result of a decimal div V2: " + decimalDivResultV2);
+Console.WriteLine("Student\t\tGrade");
+Console.WriteLine($"Sophia\t\t{averageSophia}\t\t");
+Console.WriteLine($"Nicolas\t\t{averageNicolas}");
+Console.WriteLine($"Zafirah\t\t{averageZafirah}");
+Console.WriteLine($"Jeong\t\t{averageJeong}");
 
-//Div two doubles
-var decimalDiv = decimalNumber1 / decimalNumber2;
-Console.WriteLine("This is the result of a div of two doubles: " + decimalDiv);
+//Exercise Lesson5
+string studentName = "Sophia Johnson";
+string course1Name = "English 101";
+string course2Name = "Algebra 101";
+string course3Name = "Biology 101";
+string course4Name = "Computer Science I";
+string course5Name = "Psychology 101";
 
-//Rest of a div of int
-var restDiv = firstNumber2 % secondNumber2;
-Console.WriteLine("This is the rest of a div: " + restDiv);
+int course1Credit = 3;
+int course2Credit = 3;
+int course3Credit = 4;
+int course4Credit = 4;
+int course5Credit = 3;
 
-//Otra opcion de obtener resultados decimales de una division
-decimal a = 10 / 3m;
-Console.WriteLine(a);
+int gradeCourse1 = 4;
+int gradeCourse2 = 3;
+int gradeCourse3 = 3;
+int gradeCourse4 = 3;
+int gradeCourse5 = 4;
 
-//Exercise 2 lesson 3
-/* int value = 0;
- value = value + 5;
- value += 5;
+var multCourse1 = gradeCourse1 * course1Credit;
+var multCourse2 = gradeCourse2 * course2Credit;
+var multCourse3 = gradeCourse3 * course3Credit;
+var multCourse4 = gradeCourse4 * course4Credit;
+var multCourse5 = gradeCourse5 * course5Credit;
 
-Console.Write(value);*/
+var finalGPA = (decimal)(multCourse1+multCourse2+multCourse3+multCourse4+multCourse5) / (course1Credit + course2Credit + course3Credit + course4Credit + course5Credit);
 
-//Exercise Farenheit to Celsius
-//Para convertir temperaturas de grados Fahrenheit a Celsius, primero reste 32 y luego multiplique por cinco novenos (5/9).
-var farenheitTemperature = 78;
-var farenheitToCelsius = (farenheitTemperature - 32) * 5/9m;
-var celsiusOneDecimal =  Math.Round(farenheitToCelsius, 1);
-Console.WriteLine(farenheitToCelsius); //25.555555555555555555555555556
-Console.WriteLine($"The temperature of {farenheitTemperature}F is {celsiusOneDecimal}º Celsius."); //The temperature of 78F is 25.6º Celsius.
-
-//Options B and C
-var celsiusOneDecimal2 = decimal.Round(farenheitToCelsius, 1);
-Console.WriteLine(celsiusOneDecimal2); //25.6
-Console.WriteLine("The temperature is " + farenheitToCelsius.ToString("##.#") + " Celsius."); //Mascara de una cadena de texto
+Console.WriteLine($"Student: {studentName}\nCourse\t\tGrade\t\tCredit Hours");
+Console.WriteLine($"{course1Name}\t{gradeCourse1}\t\t{course1Credit}\n");
+Console.WriteLine(decimal.Round(finalGPA, 2));
