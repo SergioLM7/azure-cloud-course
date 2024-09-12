@@ -1,15 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.Text;
+using System;
+using System.Collections.Generic;
+
 
 //Exercise Lesson4
-/*Sophia: 93, 87, 98, 95, 100
-
-Nicolas: 80, 83, 82, 88, 85
-
-Zahirah:   84, 96, 73, 85, 79
-
-Jeong:  90, 92, 98, 100, 97*/
-
+//Calculate grade averages of every student
 var gradesSophia = 93 + 87 + 98 + 95 + 100;
 var gradesNicolas = 80 +  83 +  82 +  88 + 85;
 var gradesZafirah = 84 +  96 +  73 +  85 + 79;
@@ -27,7 +22,11 @@ Console.WriteLine($"Nicolas\t\t{averageNicolas}");
 Console.WriteLine($"Zafirah\t\t{averageZafirah}");
 Console.WriteLine($"Jeong\t\t{averageJeong}");
 
+
 //Exercise Lesson5
+//Calculate the GPA of a student and represent it in a provided format
+
+//Option A: long and unoptimized one
 string studentName = "Sophia Johnson";
 string course1Name = "English 101";
 string course2Name = "Algebra 101";
@@ -55,6 +54,10 @@ var multCourse5 = gradeCourse5 * course5Credit;
 
 var finalGPA = (decimal)(multCourse1+multCourse2+multCourse3+multCourse4+multCourse5) / (course1Credit + course2Credit + course3Credit + course4Credit + course5Credit);
 
-Console.WriteLine($"Student: {studentName}\nCourse\t\tGrade\t\tCredit Hours");
-Console.WriteLine($"{course1Name}\t{gradeCourse1}\t\t{course1Credit}\n");
-Console.WriteLine(decimal.Round(finalGPA, 2));
+Console.WriteLine($"Student: {studentName}\n\nCourse\t\t\tGrade\t\tCredit Hours");
+Console.WriteLine($"{course1Name}\t\t{gradeCourse1}\t\t{course1Credit}");
+Console.WriteLine($"{course2Name}\t\t{gradeCourse2}\t\t{course2Credit}");
+Console.WriteLine($"{course3Name}\t\t{gradeCourse3}\t\t{course3Credit}");
+Console.WriteLine($"{course4Name}\t{gradeCourse4}\t\t{course4Credit}");
+Console.WriteLine($"{course5Name}\t\t{gradeCourse5}\t\t{course5Credit}\n");
+Console.WriteLine($"Final GPA:\t\t{decimal.Round(finalGPA, 2)}");
