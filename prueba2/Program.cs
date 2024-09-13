@@ -5,18 +5,11 @@ using System.Collections.Generic;
 
 //Exercise Lesson 5 Option B: more optimized and reusable one
 //Class Course
-class Course
+class Course(string name, double grade, int credit)
 {
-    public string Name { get; set; }
-    public double Grade { get; set; }
-    public int Credit { get; set; }
-
-    public Course(string name, double grade, int credit)
-    {
-        Name = name;
-        Grade = grade;
-        Credit = credit;
-    }
+    public string Name { get; set; } = name;
+    public double Grade { get; set; } = grade;
+    public int Credit { get; set; } = credit;
 }
 
 //Class Student
@@ -65,8 +58,6 @@ class Student
                 Console.WriteLine($"{course.Name}\t\t{course.Grade}\t\t{course.Credit}");
             }
         }
-
-        //Console.WriteLine($"Computer Science I\t3\t\t4");
 
         Console.WriteLine($"\nFinal GPA: \t\t{Math.Round(CalculateGPA(), 2)}");
     }
