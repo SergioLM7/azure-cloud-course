@@ -2,48 +2,28 @@
 using System;
 using System.Collections;
 
-//Lesson 7 Conditionals
-//Last Exercise
-Random random = new Random();
-bool continua = true;
+//Lesson 8 Arrays ForEach
 
-while (continua)
+string[] fraudulentOrderIDs = new string[3];
+
+fraudulentOrderIDs[0] = "A123";
+fraudulentOrderIDs[1] = "B456";
+fraudulentOrderIDs[2] = "C789";
+//fraudulentOrderIDs[3] = "D000"; //Error because index is outside the bounds of the array
+Console.WriteLine($"There are {fraudulentOrderIDs.Length} fraudulent orders to process.");
+
+string[] names = ["Rowena", "Robin", "Bao"];
+foreach (string name in names)
 {
-    Console.Clear();
+    Console.WriteLine(name);
+}
 
-    int daysUntilExpiration = random.Next(12);
-    int discountPercentage = 0;
-    Console.WriteLine(daysUntilExpiration);
-    if (daysUntilExpiration <= 10)
-    {
-        if (daysUntilExpiration <= 5)
-        {
-            if (daysUntilExpiration == 1)
-            {
-                discountPercentage = 20;
-                Console.WriteLine($"Your subscription expires within a day!\nRenew now and save {discountPercentage}%!");
-            }
-            else if (daysUntilExpiration < 1)
-            {
-                Console.WriteLine("Your subscription has expired.");
-            }
-            else
-            {
-                discountPercentage = 10;
-                Console.WriteLine($"Your subscription expires in {daysUntilExpiration} days.\nRenew now and save {discountPercentage}%!.");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Your subscription will expire soon. Renew now!");
-        }
-    }
-
-    //Pulsando una tecla en la consola me vuela a generar un nuevo valor random hasta que pulso la q del teclado, que me saca del bucle
-    Console.WriteLine("\nPress any key to generate a new random value, or 'q' to quit.");
-    var key = Console.ReadKey();
-     if (key.KeyChar == 'q')
-            {
-                continua = false;
-            }
+Console.Clear();
+//Exercise 1 Lesson 8
+string[] orderIDs = ["B123", "C234", "A345", "C15", "B177", "G3003", "C235", "B179"];
+foreach (var ID in orderIDs)
+{
+   if(ID.StartsWith('B'))
+    Console.WriteLine(ID);
+   
 }
