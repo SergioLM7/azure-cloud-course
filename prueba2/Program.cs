@@ -5,53 +5,97 @@ using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Text;
 
-//Lesson 9 Ternary operator
-//Exercise 2
-Random coin = new();
-int flip = coin.Next(1, 3);
-Console.WriteLine(flip == 1 ? "heads" : "tails");
+//Lesson 8 Arrays ForEach
+//Exercise 2 - IMPROVED with additional scores (10%)
+int examAssignments = 5;
 
-//Exercise 2 version 1 line
-Console.WriteLine(new Random().Next(1, 3) == 1 ? "heads" : "tails");
+int[] sophiaScores = [90, 86, 87, 98, 100, 94, 90];
+int[] andrewScores = [92, 89, 81, 96, 90, 89];
+int[] emmaScores = [90, 85, 87, 98, 68, 89, 89, 89];
+int[] loganScores = [90, 95, 87, 88, 96, 96];
+string[] studentNames = ["Sophia", "Andrew", "Emma", "Logan"];
 
-/*Use la clase Random para generar un valor.
+int[] studentScores = new int[10];
 
-Tenga en cuenta el intervalo de números necesarios.
+Console.WriteLine("Student\t\tExam Score\tOverall Grade\tExtra Credit");
 
-Según el valor generado, use el operador condicional para mostrar heads o tails.
-
-Debería haber una posibilidad del 50 % de que el resultado sea cara o cruz.
-
-El código debe ser fácil de leer, pero con el menor número posible de líneas.
-
-Debería lograr el resultado deseado en tres líneas de código o menos.*/
-
-//Exercise 3 version 1 line
-string permission = "Admin"; //Admin or Manager
-int level = 30;
-
-if (permission.Contains("Admin"))
+foreach (var student in studentNames)
 {
-    if (level > 55)
+    string currentStudent = student;
+    if (student == "Sophia")
+        studentScores = sophiaScores;
+    else if (currentStudent == "Andrew")
+        studentScores = andrewScores;
+    else if (currentStudent == "Emma")
+        studentScores = emmaScores;
+    else if (currentStudent == "Logan")
+        studentScores = loganScores;
+
+    int sumScores = 0;
+    decimal curentStudentAverage;
+
+    int gradedAssignments = 0;
+    decimal curentStudentExamsAverage = 0;
+
+    foreach (int score in studentScores)
     {
-        Console.WriteLine("Welcome, Super Admin user.");
+        // increment the assignment counter
+        gradedAssignments ++;
+
+        if (gradedAssignments <= examAssignments) 
+        {
+            // add the exam score to the sum and calculate the average only for the exams
+            sumScores += score;
+            curentStudentExamsAverage = (decimal)sumScores / examAssignments;
+        }
+        else
+            // add the extra credit points to the sum - bonus points equal to 10% of an exam score
+            sumScores += score / 10;
     }
-    else if (level <= 55)
+
+    curentStudentAverage = (decimal)sumScores / examAssignments;
+    decimal extraCredit = curentStudentAverage - curentStudentExamsAverage;
+
+    if (curentStudentAverage >= 97 && curentStudentAverage <= 100)
     {
-        Console.WriteLine("Welcome, Admin user.");
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tA+\t({extraCredit} pts)");
+    }
+    else if (curentStudentAverage >= 93 && curentStudentAverage < 97)
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tA\t({extraCredit} pts)");
+    }
+    else if (curentStudentAverage >= 90 && curentStudentAverage < 93)
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tA-\t({extraCredit} pts)");
+    }
+    else if (curentStudentAverage >= 87 && curentStudentAverage < 90)
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tB+\t({extraCredit} pts)");
+    }
+    else if (curentStudentAverage >= 83 && curentStudentAverage < 87)
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tB+\t({extraCredit} pts)");
+    }
+    else if (curentStudentAverage >= 80 && curentStudentAverage < 83)
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tB-\t({extraCredit} pts)");
+    }
+    else if (curentStudentAverage >= 77 && curentStudentAverage < 80)
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tC+\t({extraCredit} pts)");
+    }
+    else if (curentStudentAverage >= 73 && curentStudentAverage < 77)
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tC\t({extraCredit} pts)");
+    }
+    else if (curentStudentAverage >= 70 && curentStudentAverage < 73)
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tC-\t({extraCredit} pts)");
+    }
+    else
+    {
+        Console.WriteLine($"{currentStudent}\t\t{curentStudentExamsAverage}\t\t{curentStudentAverage}\tF\t({extraCredit} pts)");
     }
 }
-else if (permission.Contains("Manager"))
-{
-    if (level > 20)
-    {
-        Console.WriteLine("Contact an Admin for access.");
-    }
-    else if (level <= 20)
-    {
-        Console.WriteLine("You do not have sufficient privileges.");
-    }
-} else {
-    Console.WriteLine("You do not have sufficient privileges.");
-}
-
+Console.WriteLine("\nPress the Enter key to continue");
+Console.ReadLine();
