@@ -6,25 +6,34 @@ using System.Net.Http.Headers;
 using System.Text;
 
 //Lesson 9 Loops
-//Exercise 1 Fizz Buzz
+//Exercise Role Battle 
+Random random = new Random();
+int heroHealth = 10;
+int monsterHealth = 10;
+int roll = random.Next(1, 11);
 
-
-for (int i = 1; i < 101; i++)
+do
 {
-    if ((i % 5 == 0) && (i % 3 == 0))
+    monsterHealth -= roll;
+    Console.WriteLine($"Monster was damaged and lost {roll} health and now has {monsterHealth} health.");
+
+    if (monsterHealth <= 0)
     {
-        Console.WriteLine(i + " - FizzBuzz");
+        Console.WriteLine("Hero wins!");
     }
-    else if (i % 5 == 0)
+    else if (monsterHealth > 0)
     {
-        Console.WriteLine(i + " - Buzz");
+        roll = random.Next(1, 11);
+        heroHealth -= roll;
+        Console.WriteLine($"Hero was damaged and lost {roll} health and now has {heroHealth} health.");
+        if (heroHealth <= 0)
+        {
+            Console.WriteLine("Monster wins!");
+        }
+        else if (heroHealth > 0)
+        {
+            roll = random.Next(1, 11);
+        }
     }
-    else if (i % 3 == 0)
-    {
-        Console.WriteLine(i + " - Fizz");
-    }
-    else
-    {
-        Console.WriteLine(i);
-    }
-}
+
+} while (heroHealth > 0 && monsterHealth > 0);
