@@ -5,35 +5,12 @@ using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Text;
 
-//Lesson 9 Loops
-//Exercise Role Battle 
-Random random = new Random();
-int heroHealth = 10;
-int monsterHealth = 10;
-int roll = random.Next(1, 11);
+//Lesson 10 
 
-do
-{
-    monsterHealth -= roll;
-    Console.WriteLine($"Monster was damaged and lost {roll} health and now has {monsterHealth} health.");
+Console.WriteLine("");
+Console.WriteLine("Unsigned integral types:");
 
-    if (monsterHealth <= 0)
-    {
-        Console.WriteLine("Hero wins!");
-    }
-    else if (monsterHealth > 0)
-    {
-        roll = random.Next(1, 11);
-        heroHealth -= roll;
-        Console.WriteLine($"Hero was damaged and lost {roll} health and now has {heroHealth} health.");
-        if (heroHealth <= 0)
-        {
-            Console.WriteLine("Monster wins!");
-        }
-        else if (heroHealth > 0)
-        {
-            roll = random.Next(1, 11);
-        }
-    }
-
-} while (heroHealth > 0 && monsterHealth > 0);
+Console.WriteLine($"byte   : {byte.MinValue} to {byte.MaxValue}");
+Console.WriteLine($"ushort : {ushort.MinValue} to {ushort.MaxValue}");
+Console.WriteLine($"uint   : {uint.MinValue} to {uint.MaxValue}");
+Console.WriteLine($"ulong  : {decimal.MinValue} to {decimal.MaxValue}");
