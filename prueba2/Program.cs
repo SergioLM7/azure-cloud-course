@@ -28,8 +28,8 @@ Console.WriteLine("Here's a quick comparison:\n");
 
 string currentProductAligned = currentProduct.PadRight(20);
 string newProductAligned = newProduct.PadRight(20);
-string currentReturnAligned = String.Format("{0:P2}", currentReturn).PadRight(10);
-string newReturnAligned = String.Format("{0:P2}", newReturn).PadRight(10);
+string currentReturnAligned = string.Format("{0:P2}", currentReturn).PadRight(10);
+string newReturnAligned = string.Format("{0:P2}", newReturn).PadRight(10);
 
 Console.WriteLine($"{currentProductAligned}{currentReturnAligned}{currentProfit:C}\n{newProductAligned}{newReturnAligned}{newProfit:C}");
 
