@@ -8,92 +8,69 @@ using System.Globalization;
 CultureInfo.CurrentCulture = new CultureInfo("es-ES");
 
 //Lesson 13 Methods
-//Exercise 1 First Method
-/*void DisplayRandomNumbers() {
-    Random random = new Random();
+//Exercise 3
+/*
+if ipAddress consists of 4 numbers
+and
+if each ipAddress number has no leading zeroes
+and
+if each ipAddress number is in range 0 - 255
 
-     for (int i = 0; i < 5; i++) 
+then ipAddress is valid
+
+else ipAddress is invalid
+*/
+string[] ipv4Input = {"107.31.1.5", "255.0.0.255", "555..0.555", "255...255", };
+
+bool validLength;
+bool validZeroes = false;
+bool validRange = false;
+
+foreach (string ip in ipv4Input) 
+{
+    string[] address = ip.Split(".", StringSplitOptions.RemoveEmptyEntries);
+
+    ValidateLength(address); 
+    ValidateZeroes(address); 
+    ValidateRange(address);
+
+    if (validLength && validZeroes && validRange) 
     {
-        Console.Write($"{random.Next(1, 100)} ");
+        Console.WriteLine($"{ip} is a valid IPv4 address");
+    } 
+    else 
+    {
+        Console.WriteLine($"{ip} is an INVALID IPv4 address");
     }
+}
 
-     Console.WriteLine();
+bool ValidateLength(string[] address) {
+    return validLength = address.Length == 4;
 };
 
-Console.WriteLine("Generating random numbers:");
-DisplayRandomNumbers();*/
+bool ValidateZeroes(string[] address) {
 
-//Exercise 2
-int[] times = {800, 1200, 1600, 2000};
-int diff = 0;
-
-Console.WriteLine("Enter current GMT");
-int currentGMT = Convert.ToInt32(Console.ReadLine());
-
-Console.WriteLine("Current Medicine Schedule:");
-/* Format and display medicine times */
-DisplayTimes();
-
-Console.WriteLine("Enter new GMT");
-int newGMT = Convert.ToInt32(Console.ReadLine());
-
-if (Math.Abs(newGMT) > 12 || Math.Abs(currentGMT) > 12)
-{
-    Console.WriteLine("Invalid GMT");
-}
-else if (newGMT <= 0 && currentGMT <= 0 || newGMT >= 0 && currentGMT >= 0) 
-{
-    diff = 100 * (Math.Abs(newGMT) - Math.Abs(currentGMT));
-
-    /* Adjust the times by adding the difference, keeping the value within 24 hours */
-    AdjustTimes();
-} 
-else 
-{
-    diff = 100 * (Math.Abs(newGMT) + Math.Abs(currentGMT));
-
-    /* Adjust the times by adding the difference, keeping the value within 24 hours */
-    AdjustTimes();
-}
-
-Console.WriteLine("New Medicine Schedule:");
-
-/* Format and display medicine times */
-DisplayTimes();
-
-
-void DisplayTimes() 
-{
-    /* Format and display medicine times */
-    foreach (int val in times)
+    foreach (string number in address) 
     {
-        string time = val.ToString();
-        int len = time.Length;
-
-        if (len >= 3)
+        if (number.Length > 1 && number.StartsWith("0")) 
         {
-            time = time.Insert(len - 2, ":");
+            return validZeroes = false;
         }
-        else if (len == 2)
-        {
-            time = time.Insert(0, "0:");
-        }
-        else
-        {
-            time = time.Insert(0, "0:0");
-        }
-
-        Console.Write($"{time} ");
     }
+    return validZeroes = true;
 
-    Console.WriteLine();
-}
+};
 
-void AdjustTimes() 
-{
-    /* Adjust the times by adding the difference, keeping the value within 24 hours */
-    for (int i = 0; i < times.Length; i++) 
+bool ValidateRange(string[] address) {
+
+    foreach (string number in address) 
     {
-        times[i] = ((times[i] + diff)) % 2400;
+        int value = int.Parse(number);
+        if (value < 0 || value > 255) 
+        {
+            return validRange = false;
+            
+        }
     }
-}
+    return validRange = true;
+};
