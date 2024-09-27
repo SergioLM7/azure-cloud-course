@@ -9,45 +9,65 @@ using System.Runtime.ExceptionServices;
 CultureInfo.CurrentCulture = new CultureInfo("es-ES");
 
 //Lesson 13 Methods
-//Project 1
-string[,] corporate =
+//Exercise 3 - UPDATED
+//Lesson 13 Methods
+//Exercise 3
+/*
+if ipAddress consists of 4 numbers
+and
+if each ipAddress number has no leading zeroes
+and
+if each ipAddress number is in range 0 - 255
+
+then ipAddress is valid
+
+else ipAddress is invalid
+*/
+string[] ipv4Input = { "107.31.1.5", "255.0.0.255", "555..0.555", "255...255", };
+
+bool validLength;
+bool validNumber;
+
+foreach (string ip in ipv4Input)
 {
-    {"Robert", "Bavin"}, {"Simon", "Bright"},
-    {"Kim", "Sinclair"}, {"Aashrita", "Kamath"},
-    {"Sarah", "Delucchi"}, {"Sinan", "Ali"}
-};
+    string[] address = ip.Split(".", StringSplitOptions.RemoveEmptyEntries);
 
-string[,] external =
-{
-    {"Vinnie", "Ashton"}, {"Cody", "Dysart"},
-    {"Shay", "Lawrence"}, {"Daren", "Valdes"}
-};
+    ValidateLength(address);
+    ValidateNumber(address);
 
-string externalDomain = "hayworth.com";
-
-printEmails(corporate);
-printEmails(external, externalDomain);
-
-void printEmails(string[,] company, string domain = "contoso.com")
-{
-    for (int i = 0; i < company.GetLength(0); i++)
+    if (validLength && validNumber)
     {
-        if (string.IsNullOrWhiteSpace(company[i, 0]) || string.IsNullOrWhiteSpace(company[i, 1]))
+        Console.WriteLine($"{ip} is a valid IPv4 address");
+    }
+    else
+    {
+        Console.WriteLine($"{ip} is an INVALID IPv4 address");
+    }
+}
+
+bool ValidateLength(string[] address)
+{
+    return validLength = address.Length == 4;
+};
+
+
+bool ValidateNumber(string[] address)
+{
+    foreach (string number in address)
+    {
+        if (number.Length > 1 && number.StartsWith("0"))
         {
-            Console.WriteLine($"Row {i+1}: Missing or incomplete employee data. Cannot create email.");
+            return validNumber = false;
         }
         else
         {
-            string finalEmail = $"{createEmail(company[i, 0], company[i, 1])}{domain}";
-            Console.WriteLine(finalEmail);
+            int value = int.Parse(number);
+            if (value < 0 || value > 255)
+            {
+                return validNumber = false;
+
+            }
         }
     }
-};
-
-
-string createEmail(string name, string surname)
-{
-    string firstLetters = name.Substring(0, 2).ToLower();
-    string email = $"{firstLetters}{surname.ToLower()}@";
-    return email;
+    return validNumber = true;
 };
