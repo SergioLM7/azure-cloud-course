@@ -5,51 +5,49 @@ using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Globalization;
+using System.Runtime.ExceptionServices;
 CultureInfo.CurrentCulture = new CultureInfo("es-ES");
 
 //Lesson 13 Methods
-//Exercise 6
-string[] guestList = { "Rebecca", "Nadia", "Noor", "Jonte" };
-string[] rsvps = new string[10];
-int count = 0;
-RSVP("Rebecca");
-RSVP("Nadia", 2, "Nuts");
-RSVP(name: "Linh", partySize: 2, inviteOnly: false);
-RSVP("Tony", allergies: "Jackfruit", inviteOnly: true);
-RSVP("Noor", 4, inviteOnly: false);
-RSVP("Jonte", 2, "Stone fruit", false);
-ShowRSVPs();
-
-
-void RSVP(string name, int partySize = 1, string allergies="none", bool inviteOnly=true)
+//Project 1
+string[,] corporate =
 {
-    if (inviteOnly)
+    {"Robert", "Bavin"}, {"Simon", "Bright"},
+    {"Kim", "Sinclair"}, {"Aashrita", "Kamath"},
+    {"Sarah", "Delucchi"}, {"Sinan", "Ali"}
+};
+
+string[,] external =
+{
+    {"Vinnie", "Ashton"}, {"Cody", "Dysart"},
+    {"Shay", "Lawrence"}, {"Daren", "Valdes"}
+};
+
+string externalDomain = "hayworth.com";
+
+printEmails(corporate);
+printEmails(external, externalDomain);
+
+void printEmails(string[,] company, string domain = "contoso.com")
+{
+    for (int i = 0; i < company.GetLength(0); i++)
     {
-        bool found = false;
-        foreach (string guest in guestList)
+        if (string.IsNullOrWhiteSpace(company[i, 0]) || string.IsNullOrWhiteSpace(company[i, 1]))
         {
-            if (guest.Equals(name))
-            {
-                found = true;
-                break;
-            }
+            Console.WriteLine($"Row {i+1}: Missing or incomplete employee data. Cannot create email.");
         }
-        if (!found)
+        else
         {
-            Console.WriteLine($"Sorry, {name} is not on the guest list");
-            return;
+            string finalEmail = $"{createEmail(company[i, 0], company[i, 1])}{domain}";
+            Console.WriteLine(finalEmail);
         }
     }
+};
 
-    rsvps[count] = $"Name: {name}, \tParty Size: {partySize}, \tAllergies: {allergies}";
-    count++;
-}
 
-void ShowRSVPs()
+string createEmail(string name, string surname)
 {
-    Console.WriteLine("\nTotal RSVPs:");
-    for (int i = 0; i < count; i++)
-    {
-        Console.WriteLine(rsvps[i]);
-    }
-}
+    string firstLetters = name.Substring(0, 2).ToLower();
+    string email = $"{firstLetters}{surname.ToLower()}@";
+    return email;
+};
