@@ -7,194 +7,93 @@ using System.Text;
 using System.Globalization;
 CultureInfo.CurrentCulture = new CultureInfo("es-ES");
 
-//Lesson 10 Do While
-//Project 1
-// the ourAnimals array will store the following: 
-string animalSpecies = "";
-string animalID = "";
-string animalAge = "";
-string animalPhysicalDescription = "";
-string animalPersonalityDescription = "";
-string animalNickname = "";
+//Lesson 13 Methods
+//Exercise 1 First Method
+/*void DisplayRandomNumbers() {
+    Random random = new Random();
 
-// variables that support data entry
-int maxPets = 8;
-string? readResult;
-string menuSelection = "";
-
-// array used to store runtime data, there is no persisted data
-string[,] ourAnimals = new string[maxPets, 6];
-
-
-// create some initial ourAnimals array entries
-for (int i = 0; i < maxPets; i++)
-{
-    switch (i)
+     for (int i = 0; i < 5; i++) 
     {
-        case 0:
-            animalSpecies = "dog";
-            animalID = "d1";
-            animalAge = "2";
-            animalPhysicalDescription = "medium sized cream colored female golden retriever weighing about 65 pounds. housebroken.";
-            animalPersonalityDescription = "loves to have her belly rubbed and likes to chase her tail. gives lots of kisses.";
-            animalNickname = "lola";
-            break;
-        case 1:
-            animalSpecies = "dog";
-            animalID = "d2";
-            animalAge = "9";
-            animalPhysicalDescription = "large reddish-brown male golden retriever weighing about 85 pounds. housebroken.";
-            animalPersonalityDescription = "loves to have his ears rubbed when he greets you at the door, or at any time! loves to lean-in and give doggy hugs.";
-            animalNickname = "loki";
-            break;
-        case 2:
-            animalSpecies = "cat";
-            animalID = "c3";
-            animalAge = "1";
-            animalPhysicalDescription = "small white female weighing about 8 pounds. litter box trained.";
-            animalPersonalityDescription = "friendly";
-            animalNickname = "Puss";
-            break;
-        case 3:
-            animalSpecies = "cat";
-            animalID = "c4";
-            animalAge = "?";
-            animalPhysicalDescription = "";
-            animalPersonalityDescription = "";
-            animalNickname = "";
-            break;
-        default:
-            animalSpecies = "";
-            animalID = "";
-            animalAge = "";
-            animalPhysicalDescription = "";
-            animalPersonalityDescription = "";
-            animalNickname = "";
-            break;
+        Console.Write($"{random.Next(1, 100)} ");
     }
 
+     Console.WriteLine();
+};
 
+Console.WriteLine("Generating random numbers:");
+DisplayRandomNumbers();*/
 
-    ourAnimals[i, 0] = "ID #: " + animalID;
-    ourAnimals[i, 1] = "Species: " + animalSpecies;
-    ourAnimals[i, 2] = "Age: " + animalAge;
-    ourAnimals[i, 3] = "Nickname: " + animalNickname;
-    ourAnimals[i, 4] = "Physical description: " + animalPhysicalDescription;
-    ourAnimals[i, 5] = "Personality: " + animalPersonalityDescription;
+//Exercise 2
+int[] times = {800, 1200, 1600, 2000};
+int diff = 0;
+
+Console.WriteLine("Enter current GMT");
+int currentGMT = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine("Current Medicine Schedule:");
+/* Format and display medicine times */
+DisplayTimes();
+
+Console.WriteLine("Enter new GMT");
+int newGMT = Convert.ToInt32(Console.ReadLine());
+
+if (Math.Abs(newGMT) > 12 || Math.Abs(currentGMT) > 12)
+{
+    Console.WriteLine("Invalid GMT");
+}
+else if (newGMT <= 0 && currentGMT <= 0 || newGMT >= 0 && currentGMT >= 0) 
+{
+    diff = 100 * (Math.Abs(newGMT) - Math.Abs(currentGMT));
+
+    /* Adjust the times by adding the difference, keeping the value within 24 hours */
+    AdjustTimes();
+} 
+else 
+{
+    diff = 100 * (Math.Abs(newGMT) + Math.Abs(currentGMT));
+
+    /* Adjust the times by adding the difference, keeping the value within 24 hours */
+    AdjustTimes();
 }
 
-// display the top-level menu options
-do
-{
-    Console.Clear();
+Console.WriteLine("New Medicine Schedule:");
 
-    Console.WriteLine("Welcome to the Contoso PetFriends app. Your main menu options are:");
-    Console.WriteLine(" 1. List all of our current pet information");
-    Console.WriteLine(" 2. Add a new animal friend to the ourAnimals array");
-    Console.WriteLine(" 3. Ensure animal ages and physical descriptions are complete");
-    Console.WriteLine(" 4. Ensure animal nicknames and personality descriptions are complete");
-    Console.WriteLine(" 5. Edit an animal’s age");
-    Console.WriteLine(" 6. Edit an animal’s personality description");
-    Console.WriteLine(" 7. Display all cats with a specified characteristic");
-    Console.WriteLine(" 8. Display all dogs with a specified characteristic");
+/* Format and display medicine times */
+DisplayTimes();
+
+
+void DisplayTimes() 
+{
+    /* Format and display medicine times */
+    foreach (int val in times)
+    {
+        string time = val.ToString();
+        int len = time.Length;
+
+        if (len >= 3)
+        {
+            time = time.Insert(len - 2, ":");
+        }
+        else if (len == 2)
+        {
+            time = time.Insert(0, "0:");
+        }
+        else
+        {
+            time = time.Insert(0, "0:0");
+        }
+
+        Console.Write($"{time} ");
+    }
+
     Console.WriteLine();
-    Console.WriteLine("Enter your selection number (or type Exit to exit the program)");
-
-    readResult = Console.ReadLine();
-    if (readResult != null)
-    {
-        menuSelection = readResult.ToLower();
-    }
-
-    // Console.WriteLine($"You selected menu option {menuSelection}.");
-    //Console.WriteLine("Press the Enter key to continue");
-
-    // pause code execution
-    //readResult = Console.ReadLine();
-
-    switch (menuSelection)
-    {
-        case "1":
-            // List all of our current pet information
-            for (int i = 0; i < maxPets; i++)
-            {
-                if (ourAnimals[i, 0] != "ID #: ")
-                {
-                    Console.WriteLine();
-                    for (int j = 0; j < 6; j++)
-                    {
-                        Console.WriteLine(ourAnimals[i, j]);
-                    }
-                }
-            }
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
-
-        case "2":
-            // Add a new animal friend to the ourAnimals array
-            string anotherPet = "y";
-            int petCount = 0;
-            for (int i = 0; i < maxPets; i++)
-            {
-                if (ourAnimals[i, 0] != "ID #: ")
-                {
-                    petCount += 1;
-                }
-            }
-            if (petCount < maxPets)
-            {
-                Console.WriteLine($"We currently have {petCount} pets that need homes. We can manage {(maxPets - petCount)} more.");
-                while (anotherPet == "y" && petCount < maxPets)
-{
 }
 
-            }
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
-
-        case "3":
-            // Ensure animal ages and physical descriptions are complete    
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
-
-        case "4":
-            //Ensure animal nicknames and personality descriptions are complete
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
-
-        case "5":
-            Console.WriteLine("UNDER CONSTRUCTION - please check back next month to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
-
-        case "6":
-            Console.WriteLine("UNDER CONSTRUCTION - please check back next month to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
-
-        case "7":
-            Console.WriteLine("UNDER CONSTRUCTION - please check back next month to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
-
-        case "8":
-            Console.WriteLine("UNDER CONSTRUCTION - please check back next month to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
-        default:
-            break;
+void AdjustTimes() 
+{
+    /* Adjust the times by adding the difference, keeping the value within 24 hours */
+    for (int i = 0; i < times.Length; i++) 
+    {
+        times[i] = ((times[i] + diff)) % 2400;
     }
-} while (menuSelection != "exit");
-
-
-
+}
