@@ -6,38 +6,54 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Globalization;
 using System.Runtime.ExceptionServices;
+using System.Transactions;
+using Microsoft.VisualBasic;
 CultureInfo.CurrentCulture = new CultureInfo("es-ES");
 
-//MI primer PULL REQUEST
-//Lesson 14 Methods - Return values
-double total = 0;
-double minimumSpend = 30.00;
+//Lesson 14 Methods
+//Exercise - Dice Game
+Random random = new Random();
 
-double[] items = {15.97, 3.50, 12.25, 22.99, 10.98};
-double[] discounts = {0.30, 0.00, 0.10, 0.20, 0.50};
+Console.WriteLine("Would you like to play? (Y/N)");
+var key = Console.ReadKey(true);
 
-for (int i = 0; i < items.Length; i++)
+if (ShouldPlay(key.KeyChar)) 
 {
-    total += GetDiscountedPrice(i);
-}
-if (TotalMeetsMinimum())
-{
-    total -= 5.00;
+    PlayGame();
 }
 
-Console.WriteLine($"Total: ${FormatDecimal(total)}");
-
-double GetDiscountedPrice(int itemIndex)
+string WinOrLose(int target, int roll)
 {
-    return items[itemIndex] * (1 - discounts[itemIndex]);
+    return target > roll ? "You lose!" : "You win!";
 }
 
-bool TotalMeetsMinimum()
+void PlayGame() 
 {
-    return total >= minimumSpend;
+    var play = true;
+
+    while (play) 
+    {
+        var target = random.Next(1,6);
+        var roll = random.Next(1,7);
+
+        Console.WriteLine($"Roll a number greater than {target} to win!");
+        Console.WriteLine("Roll your six-faces dice with the Enter key...");
+        Console.ReadLine();
+        Console.WriteLine($"You rolled a {roll}");
+        Console.WriteLine(WinOrLose(target, roll));
+        Console.WriteLine("\nPlay again? (Y/N)");
+        var key = Console.ReadKey(true);
+        play = ShouldPlay(key.KeyChar);
+    }
 }
 
-string FormatDecimal(double input)
+bool ShouldPlay(char key) 
 {
-    return input.ToString().Substring(0, 5);
+    if (key == 'y') {
+        return true;
+    } else if (key == 'n') {
+        return false;
+    } else {
+        return false;
+    }
 }
