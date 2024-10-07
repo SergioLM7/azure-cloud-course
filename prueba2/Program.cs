@@ -8,66 +8,35 @@ using System.Globalization;
 using System.Runtime.ExceptionServices;
 CultureInfo.CurrentCulture = new CultureInfo("es-ES");
 
-//Lesson 13 Methods
-//Exercise 3 - UPDATED
-//Lesson 13 Methods
-//Exercise 3
-/*
-if ipAddress consists of 4 numbers
-and
-if each ipAddress number has no leading zeroes
-and
-if each ipAddress number is in range 0 - 255
+//Lesson 14 Methods - Return values
+double total = 0;
+double minimumSpend = 30.00;
 
-then ipAddress is valid
+double[] items = {15.97, 3.50, 12.25, 22.99, 10.98};
+double[] discounts = {0.30, 0.00, 0.10, 0.20, 0.50};
 
-else ipAddress is invalid
-*/
-string[] ipv4Input = { "107.31.1.5", "255.0.0.255", "555..0.555", "255...255", };
-
-bool validLength;
-bool validNumber;
-
-foreach (string ip in ipv4Input)
+for (int i = 0; i < items.Length; i++)
 {
-    string[] address = ip.Split(".", StringSplitOptions.RemoveEmptyEntries);
-
-    ValidateLength(address);
-    ValidateNumber(address);
-
-    if (validLength && validNumber)
-    {
-        Console.WriteLine($"{ip} is a valid IPv4 address");
-    }
-    else
-    {
-        Console.WriteLine($"{ip} is an INVALID IPv4 address");
-    }
+    total += GetDiscountedPrice(i);
+}
+if (TotalMeetsMinimum())
+{
+    total -= 5.00;
 }
 
-bool ValidateLength(string[] address)
+Console.WriteLine($"Total: ${FormatDecimal(total)}");
+
+double GetDiscountedPrice(int itemIndex)
 {
-    return validLength = address.Length == 4;
-};
+    return items[itemIndex] * (1 - discounts[itemIndex]);
+}
 
-
-bool ValidateNumber(string[] address)
+bool TotalMeetsMinimum()
 {
-    foreach (string number in address)
-    {
-        if (number.Length > 1 && number.StartsWith("0"))
-        {
-            return validNumber = false;
-        }
-        else
-        {
-            int value = int.Parse(number);
-            if (value < 0 || value > 255)
-            {
-                return validNumber = false;
+    return total >= minimumSpend;
+}
 
-            }
-        }
-    }
-    return validNumber = true;
-};
+string FormatDecimal(double input)
+{
+    return input.ToString().Substring(0, 5);
+}
