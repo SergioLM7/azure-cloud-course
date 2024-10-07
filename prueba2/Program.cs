@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Runtime.ExceptionServices;
 CultureInfo.CurrentCulture = new CultureInfo("es-ES");
 
+//MI primer PULL REQUEST
 //Lesson 14 Methods - Return values
 double total = 0;
 double minimumSpend = 30.00;
