@@ -1,4 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿//Mi primer CI
+// See https://aka.ms/new-console-template for more information
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
